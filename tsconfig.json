@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["ES2023", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "paths": {
+      "*": ["./*"],
+      "unplugin-strip-attrs": ["./src/index.ts"],
+      "unplugin-strip-attrs/*": ["./src/*"]
+    },
+    "types": ["node"],
+    "resolveJsonModule": true,
+    "erasableSyntaxOnly": true,
+    "libReplacement": false,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}

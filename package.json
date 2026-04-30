@@ -1,0 +1,111 @@
+{
+  "name": "unplugin-strip-attrs",
+  "version": "0.0.0",
+  "description": "Strip test-related attributes like data-testid and data-cy from JSX, Vue, Svelte, and HTML at build time.",
+  "keywords": [
+    "data-cy",
+    "data-testid",
+    "esbuild-plugin",
+    "jsx",
+    "rollup-plugin",
+    "rspack-plugin",
+    "strip-attrs",
+    "svelte",
+    "unplugin",
+    "vite-plugin",
+    "vue",
+    "webpack-plugin"
+  ],
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    },
+    "./esbuild": {
+      "types": "./dist/esbuild.d.mts",
+      "import": "./dist/esbuild.mjs"
+    },
+    "./farm": {
+      "types": "./dist/farm.d.mts",
+      "import": "./dist/farm.mjs"
+    },
+    "./rolldown": {
+      "types": "./dist/rolldown.d.mts",
+      "import": "./dist/rolldown.mjs"
+    },
+    "./rollup": {
+      "types": "./dist/rollup.d.mts",
+      "import": "./dist/rollup.mjs"
+    },
+    "./rspack": {
+      "types": "./dist/rspack.d.mts",
+      "import": "./dist/rspack.mjs"
+    },
+    "./unloader": {
+      "types": "./dist/unloader.d.mts",
+      "import": "./dist/unloader.mjs"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.mts",
+      "import": "./dist/vite.mjs"
+    },
+    "./webpack": {
+      "types": "./dist/webpack.d.mts",
+      "import": "./dist/webpack.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch src",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "lint": "oxlint",
+    "prepare": "husky",
+    "prepublishOnly": "pnpm run build",
+    "release": "run-s release:check release:version",
+    "release:check": "run-p lint typecheck test",
+    "release:version": "bumpp",
+    "test": "vitest",
+    "typecheck": "tsgo --noEmit"
+  },
+  "dependencies": {
+    "unplugin": "^3.0.0"
+  },
+  "devDependencies": {
+    "@farmfe/core": "^1.7.11",
+    "@rspack/cli": "^2.0.1",
+    "@types/node": "^25.6.0",
+    "@typescript/native-preview": "^7.0.0-dev.20260429.1",
+    "bumpp": "^11.0.1",
+    "husky": "^9.1.7",
+    "nano-staged": "^1.0.2",
+    "npm-run-all2": "^8.0.4",
+    "oxfmt": "^0.47.0",
+    "oxlint": "^1.62.0",
+    "rolldown": "^1.0.0-rc.18",
+    "rollup": "^4.60.2",
+    "tinyglobby": "^0.2.16",
+    "tsdown": "^0.21.10",
+    "tsx": "^4.21.0",
+    "unloader": "^0.9.0",
+    "vite": "^8.0.10",
+    "vitest": "^4.1.5",
+    "webpack": "^5.106.2"
+  },
+  "nano-staged": {
+    "*.{js,ts,mjs,tsx,vue}": "oxlint --fix",
+    "*": "oxfmt --no-error-on-unmatched-pattern"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "packageManager": "pnpm@10.33.2"
+}
