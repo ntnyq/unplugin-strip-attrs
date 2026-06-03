@@ -66,7 +66,7 @@ export function matchesPattern(
  */
 export function getTagName(tag: string): string | undefined {
   let i = 1
-  while (i < tag.length && /\s/.test(tag[i])) {
+  while (i < tag.length && /\s/u.test(tag[i])) {
     i += 1
   }
 
@@ -75,7 +75,7 @@ export function getTagName(tag: string): string | undefined {
   }
 
   const start = i
-  while (i < tag.length && /[A-Za-z0-9_:.-]/.test(tag[i])) {
+  while (i < tag.length && /[A-Za-z0-9_:.-]/u.test(tag[i])) {
     i += 1
   }
 

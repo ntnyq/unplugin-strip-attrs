@@ -18,7 +18,7 @@ export function registerOptionMatrixTests(
   describe(`option matrix in ${language}`, () => {
     it('supports attrs with string and regex patterns', () => {
       const options = resolveOptions({
-        attrs: ['data-qa', /^data-e2e-/],
+        attrs: ['data-qa', /^data-e2e-/u],
       })
 
       const result = stripAttrs(templates.attrsInput, `Attrs.${ext}`, options)
@@ -32,7 +32,7 @@ export function registerOptionMatrixTests(
     it('supports keepAttrs with string and regex rules', () => {
       const options = resolveOptions({
         attrs: ['data-testid', 'data-cy', 'data-qa'],
-        keepAttrs: ['data-cy', /^data-q/],
+        keepAttrs: ['data-cy', /^data-q/u],
       })
 
       const result = stripAttrs(
@@ -48,7 +48,7 @@ export function registerOptionMatrixTests(
 
     it('supports keepValues with string and regex rules', () => {
       const options = resolveOptions({
-        keepValues: ['keep-me', /^stable:/],
+        keepValues: ['keep-me', /^stable:/u],
       })
 
       const result = stripAttrs(
@@ -64,7 +64,7 @@ export function registerOptionMatrixTests(
 
     it('supports ignoreTagNames with string and regex rules', () => {
       const options = resolveOptions({
-        ignoreTagNames: ['section', /^Ui/],
+        ignoreTagNames: ['section', /^Ui/u],
       })
 
       const result = stripAttrs(

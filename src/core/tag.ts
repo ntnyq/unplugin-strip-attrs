@@ -31,7 +31,7 @@ function shouldSkipTag(
   }
 
   const start = i
-  while (i < tag.length && /[A-Za-z0-9_:.-]/.test(tag[i])) {
+  while (i < tag.length && /[A-Za-z0-9_:.-]/u.test(tag[i])) {
     i += 1
   }
 
@@ -68,7 +68,7 @@ function readTagPart(tag: string, start: number): TagPart {
 
   let i = wsEnd
   const nameStart = i
-  while (i < tag.length && /[^\s=/>]/.test(tag[i])) {
+  while (i < tag.length && /[^\s=/>]/u.test(tag[i])) {
     i += 1
   }
 

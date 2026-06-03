@@ -125,10 +125,11 @@
         "typescript/no-non-null-assertion": "off",
         "typescript/prefer-ts-expect-error": "off",
         "typescript/require-array-sort-compare": "off",
-        "vitest/no-importing-vitest-globals": "off",
+        "vitest/require-hook": "off",
         "vitest/require-test-timeout": "off",
         "vitest/prefer-expect-assertions": "off",
         "vitest/require-top-level-describe": "off",
+        "vitest/no-importing-vitest-globals": "off",
         "vitest/consistent-test-it": [
           "warn",
           { "fn": "it", "withinDescribe": "it" },

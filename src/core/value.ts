@@ -9,7 +9,7 @@ import type { QuoteChar } from '../types'
  */
 export function skipWhitespace(input: string, start: number): number {
   let i = start
-  while (i < input.length && /\s/.test(input[i])) {
+  while (i < input.length && /\s/u.test(input[i])) {
     i += 1
   }
   return i
@@ -81,7 +81,7 @@ function readBraced(input: string, start: number): number {
  */
 function readBare(input: string, start: number): number {
   let i = start
-  while (i < input.length && !/\s|>/.test(input[i])) {
+  while (i < input.length && !/\s|>/u.test(input[i])) {
     if (input[i] === '/') {
       break
     }

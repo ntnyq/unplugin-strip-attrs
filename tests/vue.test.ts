@@ -25,7 +25,7 @@ describe('vue transform', () => {
 
   it('handles dynamic bindings and keepValues', () => {
     const options = resolveOptions({
-      keepValues: [/^keep:/],
+      keepValues: [/^keep:/u],
     })
 
     const input = `

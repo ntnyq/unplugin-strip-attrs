@@ -30,7 +30,7 @@ export function View() {
 
     expect(result.code).toContain('{/* keep comment */}')
     expect(result.code).toMatch(
-      /<button\s+disabled\s+className="btn">Go<\/button>/,
+      /<button\s+disabled\s+className="btn">Go<\/button>/u,
     )
     expect(result.code).toContain('<input data-test-id={id} aria-label="n" />')
     expect(result.code).not.toContain('data-testid=')

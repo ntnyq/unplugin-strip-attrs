@@ -14,7 +14,7 @@ const COMMENT_CLOSE_LEN = COMMENT_CLOSE.length
  * @returns Whether the character is identifier-like.
  */
 function isWordChar(char: string | undefined): boolean {
-  return !!char && /[\w$]/.test(char)
+  return !!char && /[\w$]/u.test(char)
 }
 
 /**
@@ -27,7 +27,7 @@ function isWordChar(char: string | undefined): boolean {
 function isLikelyTagStart(code: string, start: number): boolean {
   const prev = code[start - 1]
   const next = code[start + 1]
-  const possibleTag = /[A-Za-z!/]/.test(next || '')
+  const possibleTag = /[A-Za-z!/]/u.test(next || '')
   return possibleTag && !isWordChar(prev)
 }
 
@@ -57,8 +57,8 @@ function isRawTextOpenTag(tag: string, tagName: string | undefined): boolean {
     return false
   }
 
-  const isClosingTag = /^<\s*\//.test(tag)
-  const isSelfClosing = /\/\s*>$/.test(tag)
+  const isClosingTag = /^<\s*\//u.test(tag)
+  const isSelfClosing = /\/\s*>$/u.test(tag)
   return !isClosingTag && !isSelfClosing
 }
 
@@ -190,7 +190,7 @@ export function stripAttrs(
         const tag = code.slice(start, end + 1)
         const cleaned = cleanTag(tag, id, options)
         out += cleaned.code
-        changed = changed || cleaned.changed
+        changed ||= cleaned.changed
 
         const next = getNextIndexAfterRawText(code, end, tag)
         const { i: nextIndex, rawText } = next

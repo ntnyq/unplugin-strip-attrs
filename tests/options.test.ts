@@ -6,23 +6,23 @@ describe('options behavior', () => {
   it('uses default attrs of data-testid and data-cy only', () => {
     const options = resolveOptions({})
 
-    expect(options.attrs).toEqual(['data-testid', 'data-cy'])
+    expect(options.attrs).toStrictEqual(['data-testid', 'data-cy'])
   })
 
   it('resolves include/exclude/enforce/root defaults', () => {
     const options = resolveOptions({})
 
     expect(options.enforce).toBe('post')
-    expect(options.include).toEqual([
-      /\.(?:[cm]?[jt]sx|vue|svelte|html|astro|mdx)$/i,
+    expect(options.include).toStrictEqual([
+      /\.(?:[cm]?[jt]sx|vue|svelte|html|astro|mdx)$/iu,
     ])
-    expect(options.exclude).toEqual([/\.d\.ts$/])
+    expect(options.exclude).toStrictEqual([/\.d\.ts$/u])
     expect(options.root.length).toBeGreaterThan(0)
   })
 
   it('respects include/exclude/enforce/root overrides', () => {
-    const include = [/\.foo$/]
-    const exclude = [/\.bar$/]
+    const include = [/\.foo$/u]
+    const exclude = [/\.bar$/u]
     const options = resolveOptions({
       include,
       exclude,
@@ -30,15 +30,15 @@ describe('options behavior', () => {
       root: '/tmp/project',
     })
 
-    expect(options.include).toEqual(include)
-    expect(options.exclude).toEqual(exclude)
+    expect(options.include).toStrictEqual(include)
+    expect(options.exclude).toStrictEqual(exclude)
     expect(options.enforce).toBe('pre')
     expect(options.root).toBe('/tmp/project')
   })
 
   it('keeps attrs whose values match keepValues', () => {
     const options = resolveOptions({
-      keepValues: [/^keep:/],
+      keepValues: [/^keep:/u],
     })
 
     const input = '<div data-testid="keep:stable" data-cy="drop-me" />'
@@ -49,7 +49,7 @@ describe('options behavior', () => {
 
   it('supports custom attrs via strings and regex', () => {
     const options = resolveOptions({
-      attrs: ['data-test', /^data-e2e-/],
+      attrs: ['data-test', /^data-e2e-/u],
     })
 
     const input =
@@ -64,7 +64,7 @@ describe('options behavior', () => {
   it('supports keepAttrs string and regex patterns', () => {
     const options = resolveOptions({
       attrs: ['data-testid', 'data-cy', 'data-qa'],
-      keepAttrs: ['data-cy', /^data-q/],
+      keepAttrs: ['data-cy', /^data-q/u],
     })
 
     const input = '<div data-testid="drop" data-cy="keep" data-qa="keep"></div>'
@@ -77,7 +77,7 @@ describe('options behavior', () => {
 
   it('supports ignoreTagNames string and regex patterns', () => {
     const options = resolveOptions({
-      ignoreTagNames: ['section', /^Custom/],
+      ignoreTagNames: ['section', /^Custom/u],
     })
 
     const input =

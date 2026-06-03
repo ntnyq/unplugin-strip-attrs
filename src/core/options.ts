@@ -10,9 +10,9 @@ import type { Options, OptionsResolved } from '../types'
 export function resolveOptions(options: Options): OptionsResolved {
   return {
     include: options.include || [
-      /\.(?:[cm]?[jt]sx|vue|svelte|html|astro|mdx)$/i,
+      /\.(?:[cm]?[jt]sx|vue|svelte|html|astro|mdx)$/iu,
     ],
-    exclude: options.exclude || [/\.d\.ts$/],
+    exclude: options.exclude || [/\.d\.ts$/u],
     enforce: options.enforce || 'post',
     attrs: options.attrs || ['data-testid', 'data-cy'],
     keepAttrs: options.keepAttrs || [],
