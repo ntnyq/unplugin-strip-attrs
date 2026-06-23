@@ -25,12 +25,19 @@ export function skipWhitespace(input: string, start: number): number {
 function readQuoted(input: string, start: number): number {
   const quote = input[start]
   let i = start + 1
+  let escaped = false
 
-  while (i < input.length && input[i] !== quote) {
+  while (i < input.length) {
+    const ch = input[i]
+    if (!escaped && ch === quote) {
+      return i + 1
+    }
+
+    escaped = !escaped && ch === '\\'
     i += 1
   }
 
-  return i < input.length ? i + 1 : i
+  return i
 }
 
 /**
@@ -82,7 +89,7 @@ function readBraced(input: string, start: number): number {
 function readBare(input: string, start: number): number {
   let i = start
   while (i < input.length && !/\s|>/u.test(input[i])) {
-    if (input[i] === '/') {
+    if (input[i] === '/' && input[i + 1] === '>') {
       break
     }
     i += 1

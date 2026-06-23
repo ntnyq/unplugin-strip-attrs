@@ -47,6 +47,28 @@ describe('options behavior', () => {
     expect(result.code).toBe('<div data-testid="keep:stable" />')
   })
 
+  it('keeps quoted attrs with escaped quotes in values', () => {
+    const options = resolveOptions({
+      keepValues: [String.raw`keep:\"stable`],
+    })
+
+    const input = String.raw`<div data-testid="keep:\"stable" data-cy="drop" />`
+    const result = stripAttrs(input, 'EscapedQuote.tsx', options)
+
+    expect(result.code).toBe(String.raw`<div data-testid="keep:\"stable" />`)
+  })
+
+  it('keeps bare attrs with slash-containing values', () => {
+    const options = resolveOptions({
+      keepValues: ['path/to/file'],
+    })
+
+    const input = '<div data-testid=path/to/file data-cy="drop" class="ok" />'
+    const result = stripAttrs(input, 'BareSlash.svelte', options)
+
+    expect(result.code).toBe('<div data-testid=path/to/file class="ok" />')
+  })
+
   it('supports custom attrs via strings and regex', () => {
     const options = resolveOptions({
       attrs: ['data-test', /^data-e2e-/u],
